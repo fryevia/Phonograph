@@ -20,6 +20,7 @@ public class ArtistImage {
     public String toIdString() {
         StringBuilder id = new StringBuilder();
         id.append(artistName);
+        StringBuilder id = new StringBuilder(artistName);
         for (AlbumCover albumCover: albumCovers) {
             id.append(albumCover.getYear()).append(albumCover.getFilePath());
         }
