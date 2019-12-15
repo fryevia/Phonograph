@@ -62,7 +62,15 @@ public class LastFMRestClient {
     }
 
     public static OkHttpClient.Builder createDefaultOkHttpClientBuilder(Context context) {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                Log.d("LastFMRestClient", message);
+            }
+        });
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         return new OkHttpClient.Builder()
+                .addInterceptor(logging)
                 .cache(createDefaultCache(context))
                 .addInterceptor(createCacheControlInterceptor());
     }

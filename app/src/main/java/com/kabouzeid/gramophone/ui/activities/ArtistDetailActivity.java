@@ -343,7 +343,7 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
             case android.R.id.home:
                 super.onBackPressed();
                 return true;
-            case R.id.action_biography:
+            /*case R.id.action_biography:
                 if (biographyDialog == null) {
                     biographyDialog = new MaterialDialog.Builder(this)
                             .title(artist.getName())
@@ -361,16 +361,11 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
                     biographyDialog.show();
                     loadBiography();
                 }
-                return true;
-            case R.id.action_set_artist_image:
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(Intent.createChooser(intent, getString(R.string.pick_from_local_storage)), REQUEST_CODE_SELECT_IMAGE);
-                return true;
-            case R.id.action_reset_artist_image:
+                return true;*/
+            /*case R.id.action_re_download_artist_image:
                 Toast.makeText(ArtistDetailActivity.this, getResources().getString(R.string.updating), Toast.LENGTH_SHORT).show();
-                CustomArtistImageUtil.getInstance(ArtistDetailActivity.this).resetCustomArtistImage(artist);
-                return true;
+                loadArtistImage(true);
+                return true;*/
             case R.id.action_colored_footers:
                 item.setChecked(!item.isChecked());
                 setUsePalette(item.isChecked());
@@ -429,17 +424,13 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
 
     private void setArtist(Artist artist) {
         this.artist = artist;
-        loadArtistImage();
+       // loadArtistImage(false);
 
-        if (PreferenceUtil.isAllowedToDownloadMetadata(this)) {
+        /*if (Util.isAllowedToDownloadMetadata(this)) {
             loadBiography();
-        }
+        }*/
 
-        getSupportActionBar().setTitle(artist.getName());
-        songCountTextView.setText(MusicUtil.getSongCountString(this, artist.getSongCount()));
-        albumCountTextView.setText(MusicUtil.getAlbumCountString(this, artist.getAlbumCount()));
-        durationTextView.setText(MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, artist.getSongs())));
-
+        artistName.setText(artist.getName());
         songAdapter.swapDataSet(artist.getSongs());
         albumAdapter.swapDataSet(artist.albums);
     }
