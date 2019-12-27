@@ -134,6 +134,6 @@ public class ArtistGlideRequest {
     }
 
     private static Key createSignature(Artist artist) {
-        return ArtistSignatureUtil.getInstance(OmniApp.getInstance()).getArtistSignature(artist.getName());
+        return ArtistSignatureUtil.getInstance(App.getInstance()).getArtistSignature(artist.getName());
     }
 }
